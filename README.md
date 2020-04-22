@@ -1,1 +1,0 @@
-# hrnyc-mvp
