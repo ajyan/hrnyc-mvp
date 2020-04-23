@@ -1,196 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import ReactDOM from "react-dom";
+import {labels} from './labels.js'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-     photos: ['https://images.unsplash.com/photo-1587425644576-20b32e0f86ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
-              'https://images.unsplash.com/photo-1587491439780-f5a8885888e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80',
-              'https://images.unsplash.com/photo-1587497963548-2b766c58dd7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-              'https://images.unsplash.com/photo-1587497063995-9a131dcaff7a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=936&q=80',
-              'https://images.unsplash.com/photo-1587481822949-5155d07961a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80'
-             ],
-     index: 0,
-     labels: {
-       0: [
-        {
-          "mid": "/m/02wzbmj",
-          "description": "Standing",
-          "score": 0.8811611,
-          "topicality": 0.8811611
-        },
-        {
-          "mid": "/m/06_fw",
-          "description": "Skateboard",
-          "score": 0.85046923,
-          "topicality": 0.85046923
-        },
-        {
-          "mid": "/m/09j5n",
-          "description": "Footwear",
-          "score": 0.83853614,
-          "topicality": 0.83853614
-        },
-        {
-          "mid": "/m/027wrc",
-          "description": "Skate shoe",
-          "score": 0.78631365,
-          "topicality": 0.78631365
-        },
-        {
-          "mid": "/m/06rrc",
-          "description": "Shoe",
-          "score": 0.75085974,
-          "topicality": 0.75085974
-        }
-      ],
-      1: [
-        {
-          "mid": "/m/02wbm",
-          "description": "Food",
-          "score": 0.9903261,
-          "topicality": 0.9903261
-        },
-        {
-          "mid": "/m/0271t",
-          "description": "Drink",
-          "score": 0.9199456,
-          "topicality": 0.9199456
-        },
-        {
-          "mid": "/m/07xgrh",
-          "description": "Ingredient",
-          "score": 0.8804893,
-          "topicality": 0.8804893
-        },
-        {
-          "mid": "/m/02q08p0",
-          "description": "Dish",
-          "score": 0.8778561,
-          "topicality": 0.8778561
-        },
-        {
-          "mid": "/m/01ykh",
-          "description": "Cuisine",
-          "score": 0.84770674,
-          "topicality": 0.84770674
-        }
-      ],
-      2: [
-        {
-          "mid": "/m/07j7r",
-          "description": "Tree",
-          "score": 0.9857745,
-          "topicality": 0.9857745
-        },
-        {
-          "mid": "/m/02zr8",
-          "description": "Forest",
-          "score": 0.9833741,
-          "topicality": 0.9833741
-        },
-        {
-          "mid": "/m/05h0n",
-          "description": "Nature",
-          "score": 0.9655113,
-          "topicality": 0.9655113
-        },
-        {
-          "mid": "/m/03d3zqn",
-          "description": "Northern hardwood forest",
-          "score": 0.9652921,
-          "topicality": 0.9652921
-        },
-        {
-          "mid": "/m/02py09",
-          "description": "Natural environment",
-          "score": 0.962892,
-          "topicality": 0.962892
-        }
-      ],
-      3: [
-        {
-          "mid": "/m/0j_s4",
-          "description": "Metropolitan area",
-          "score": 0.98721284,
-          "topicality": 0.98721284
-        },
-        {
-          "mid": "/m/034z7h",
-          "description": "Cityscape",
-          "score": 0.9858181,
-          "topicality": 0.9858181
-        },
-        {
-          "mid": "/m/01bqvp",
-          "description": "Sky",
-          "score": 0.97692406,
-          "topicality": 0.97692406
-        },
-        {
-          "mid": "/m/05_5t0l",
-          "description": "Landmark",
-          "score": 0.9732,
-          "topicality": 0.9732
-        },
-        {
-          "mid": "/m/01n32",
-          "description": "City",
-          "score": 0.9725637,
-          "topicality": 0.9725637
-        }
-      ],
-      4: [
-        {
-          "mid": "/m/06fvc",
-          "description": "Red",
-          "score": 0.9153682,
-          "topicality": 0.9153682
-        },
-        {
-          "mid": "/m/04k84",
-          "description": "Light",
-          "score": 0.9011394,
-          "topicality": 0.9011394
-        },
-        {
-          "mid": "/m/03scnj",
-          "description": "Line",
-          "score": 0.83871853,
-          "topicality": 0.83871853
-        },
-        {
-          "mid": "/m/09ggk",
-          "description": "Purple",
-          "score": 0.8269019,
-          "topicality": 0.8269019
-        },
-        {
-          "mid": "/m/01lynh",
-          "description": "Stairs",
-          "score": 0.81998026,
-          "topicality": 0.81998026
-        }
-      ]
-     },
-     score: 0,
-     roundOver: false,
-     gameOver: false 
-    }
-    this.handleAnswerClick = this.handleAnswerClick.bind(this)
-    this.handleNext = this.handleNext.bind(this)
-  }
+function App () {
+    const photos = ['https://images.unsplash.com/photo-1587425644576-20b32e0f86ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
+    'https://images.unsplash.com/photo-1587491439780-f5a8885888e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80',
+    'https://images.unsplash.com/photo-1587497963548-2b766c58dd7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1587497063995-9a131dcaff7a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=936&q=80',
+    'https://images.unsplash.com/photo-1587481822949-5155d07961a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80'
+   ];
+   const [index,setIndex] = useState(0);
+   const [score,setScore] = useState(0);
+   const [gameOver,setGameOver] = useState(false)
+   const [roundOver,setRoundOver] = useState(false)
 
-  handleAnswerClick(event) {
-    // click the answer and change all the colors of the buttons to red/green
+   let handleAnswerClick = (event) => {
     let points = parseInt(event.target.value)
-    let score = this.state.score
-    this.setState({score: score += points})
-    this.setState({roundOver: true})
-  }
+    let newScore = score + points
+    setScore(newScore)
+    setRoundOver(true)
+   }
 
-  shuffle(array) {
+  let shuffle = (array) => {
     var currentIndex = array.length, temporaryValue, randomIndex;
   
     while (0 !== currentIndex) {
@@ -204,30 +35,28 @@ class App extends React.Component {
     return array;
   }
 
-  renderChoiceButtons(){
-    if (!this.state.roundOver && !this.state.gameOver){
-      let buttons = this.state.labels[this.state.index].map( ({description}, i) => {
-
+  let renderChoiceButtons = () => {
+    if (!roundOver && !gameOver){
+      let buttons = labels[index].map( ({description}, i) => {
         return (
-            <div key={i} >
-              <br/>
-                <button 
-                  className='button' 
-                  value={5 - i}
-                  ranking={i+1}
-                  onClick={this.handleAnswerClick}
-                >
-                  {description}
-                </button>
-              <br/>
-            </div>
-          )
+          <div key={i} >
+            <br/>
+              <button 
+                className='button' 
+                value={5 - i}
+                ranking={i+1}
+                onClick={handleAnswerClick}
+              >
+                {description}
+              </button>
+            <br/>
+          </div>
+         )
         } 
       )
-
-      return this.shuffle(buttons)
+      return shuffle(buttons)
     } else {
-      return this.state.labels[this.state.index].map( ({description}, i) => {
+      return labels[index].map( ({description}, i) => {
         return (
           <div key={i} >
             <br/>
@@ -244,59 +73,57 @@ class App extends React.Component {
     }
   }
 
-  handleNext() {
-    let index = this.state.index
-    this.setState({roundOver: false})
-    if (this.state.index < 4) {
-      this.setState({index: index + 1})
+  let handleNext = () => {
+    setRoundOver(false)
+    if (index < 4) {
+      setIndex(index + 1)
     } else {
-      this.setState({gameOver:true})
+      setGameOver(true)
     }
   }
 
-  renderNextButton(){
-    if (this.state.roundOver){
-      return <button className="button" onClick={this.handleNext}>NEXT</button>
+  let renderNextButton = () => {
+    if (roundOver){
+      return <button className="button" onClick={handleNext}>NEXT</button>
     }
   }
 
-  render() {
-    return (
-      <div>
-        <section className="hero is-info">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">
-                ai.Spy
-              </h1>
-              <h2 className="subtitle">
-                Can you guess what the Google Vision API sees?
-              </h2>
-            </div>
-            </div>
-          </section>
-          <br/>
-      <div className='columns is-centered is-vcentered is-mobile'>
-        <div className='column'></div>
-        <div className='column'>
-          <div className="box">
-            Score: {this.state.score}
+  return (
+    <div>
+      <section className="hero is-info">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">
+              ai.Spy
+            </h1>
+            <h2 className="subtitle">
+              Can you guess what the Google Vision API sees?
+            </h2>
           </div>
-          {this.renderChoiceButtons()}
         </div>
-        <div className='column'></div>
-        <div className='column is-narrow is-centered'>
-          <div className='box'>
-            <img height="400rem" width="300rem" src={this.state.photos[this.state.index]}/>
-          </div>
-          {this.renderNextButton()}
+      </section>
+        <br/>
+    <div className='columns is-centered is-vcentered is-mobile'>
+      <div className='column'/>
+      <div className='column'>
+        <div className="box">
+          Score: {score}
         </div>
-        <div className='column'></div>
-      </div>      
+        {renderChoiceButtons()}
       </div>
-    );
-  }
+      <div className='column'/>
+      <div className='column is-narrow is-centered'>
+        <div className='box'>
+          <img height="400rem" width="300rem" src={photos[index]}/>
+        </div>
+        {renderNextButton()}
+      </div>
+      <div className='column'/>
+    </div>      
+    </div>
+  );
 }
 
 var mountNode = document.getElementById("app");
 ReactDOM.render(<App/>, mountNode);
+
