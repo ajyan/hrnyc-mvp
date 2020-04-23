@@ -174,39 +174,102 @@ class App extends React.Component {
         }
       ]
      },
-
+     score: 0,
+     roundOver: false,
+     gameOver: false 
     }
-
+    this.handleAnswerClick = this.handleAnswerClick.bind(this)
+    this.handleNext = this.handleNext.bind(this)
   }
 
   handleAnswerClick(event) {
-    // let clickedId = event.target.id;
-    // for (var i = 0; i < this.state.cows.length; i++) {
-    //   if (this.state.cows[i].id === Number(clickedId)){
-    //     this.setState({currentCow: this.state.cows[i]})
-    //   }
-    // }
+    // click the answer and change all the colors of the buttons to red/green
+    let points = parseInt(event.target.value)
+    let score = this.state.score
+    this.setState({score: score += points})
+    this.setState({roundOver: true})
   }
 
-  renderChoices(index){
-
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
   }
 
-  handleChange(event) {
-    // let change = event.target.id;
-    // this.setState({[change]: event.target.value})
+  renderChoiceButtons(){
+    if (!this.state.roundOver && !this.state.gameOver){
+      let buttons = this.state.labels[this.state.index].map( ({description}, i) => {
+
+        return (
+            <div key={i} >
+              <br/>
+                <button 
+                  className='button' 
+                  value={5 - i}
+                  ranking={i+1}
+                  onClick={this.handleAnswerClick}
+                >
+                  {description}
+                </button>
+              <br/>
+            </div>
+          )
+        } 
+      )
+
+      return this.shuffle(buttons)
+    } else {
+      return this.state.labels[this.state.index].map( ({description}, i) => {
+        return (
+          <div key={i} >
+            <br/>
+              <button 
+                className='button' 
+              >
+                {i+1}. {description}
+              </button>
+            <br/>
+          </div>
+        )
+      } 
+      )
+    }
+  }
+
+  handleNext() {
+    let index = this.state.index
+    this.setState({roundOver: false})
+    if (this.state.index < 4) {
+      this.setState({index: index + 1})
+    } else {
+      this.setState({gameOver:true})
+    }
+  }
+
+  renderNextButton(){
+    if (this.state.roundOver){
+      return <button className="button" onClick={this.handleNext}>NEXT</button>
+    }
   }
 
   render() {
     return (
       <div>
-        <section class="hero is-info">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">
+        <section className="hero is-info">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">
                 ai.Spy
               </h1>
-              <h2 class="subtitle">
+              <h2 className="subtitle">
                 Can you guess what the Google Vision API sees?
               </h2>
             </div>
@@ -215,14 +278,21 @@ class App extends React.Component {
           <br/>
       <div className='columns is-centered is-vcentered is-mobile'>
         <div className='column'></div>
+        <div className='column'>
+          <div className="box">
+            Score: {this.state.score}
+          </div>
+          {this.renderChoiceButtons()}
+        </div>
         <div className='column'></div>
         <div className='column is-narrow is-centered'>
           <div className='box'>
             <img height="400rem" width="300rem" src={this.state.photos[this.state.index]}/>
           </div>
+          {this.renderNextButton()}
         </div>
         <div className='column'></div>
-      </div>
+      </div>      
       </div>
     );
   }
